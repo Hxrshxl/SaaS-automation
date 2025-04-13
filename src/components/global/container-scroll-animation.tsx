@@ -1,9 +1,9 @@
 import React from 'react'
 
-const container-scroll-animation = () => {
+const Container = () => {
   return (
     <div>container-scroll-animation</div>
   )
 }
 
-export default container-scroll-animation
+export default Container
