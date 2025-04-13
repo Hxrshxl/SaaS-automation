@@ -1,7 +1,7 @@
-'use client'
-import React, { useRef } from 'react'
-import { useScroll, useTransform, motion } from 'framer-motion'
-import Image from 'next/image'
+"use client"
+import React, { useRef } from "react"
+import { useScroll, useTransform, motion } from "framer-motion"
+import Image from "next/image"
 
 export const ContainerScroll = ({
   titleComponent,
@@ -11,6 +11,7 @@ export const ContainerScroll = ({
   const containerRef = useRef<any>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
+    offset: ["start start", "end start"],
   })
   const [isMobile, setIsMobile] = React.useState(false)
 
@@ -19,9 +20,9 @@ export const ContainerScroll = ({
       setIsMobile(window.innerWidth <= 768)
     }
     checkMobile()
-    window.addEventListener('resize', checkMobile)
+    window.addEventListener("resize", checkMobile)
     return () => {
-      window.removeEventListener('resize', checkMobile)
+      window.removeEventListener("resize", checkMobile)
     }
   }, [])
 
@@ -34,25 +35,15 @@ export const ContainerScroll = ({
   const translate = useTransform(scrollYProgress, [0, 1], [0, -100])
 
   return (
-    <div
-      className="h-[80rem] flex items-center justify-center relative p-20"
-      ref={containerRef}
-    >
+    <div className="h-[60rem] md:h-[70rem] flex items-center justify-center relative p-10 md:p-20" ref={containerRef}>
       <div
-        className="py-40 w-full relative"
+        className="py-10 md:py-40 w-full relative"
         style={{
-          perspective: '1000px',
+          perspective: "1000px",
         }}
       >
-        <Header
-          translate={translate}
-          titleComponent={titleComponent}
-        />
-        <Card
-          rotate={rotate}
-          translate={translate}
-          scale={scale}
-        />
+        <Header translate={translate} titleComponent={titleComponent} />
+        <Card rotate={rotate} translate={translate} scale={scale} />
       </div>
     </div>
   )
@@ -86,17 +77,12 @@ export const Card = ({
         rotateX: rotate, // rotate in X-axis
         scale,
         boxShadow:
-          '0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003',
+          "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
       }}
-      className="max-w-5xl -mt-12 mx-auto h-[30rem] md:h-[40rem] w-full  p-6 bg-[#222222] rounded-[30px] shadow-2xl"
+      className="max-w-5xl -mt-12 mx-auto h-[25rem] md:h-[35rem] w-full p-6 bg-[#222222] rounded-[30px] shadow-2xl"
     >
-      <div className="bg-gray-100 h-full w-full rounded-2xl  gap-4 overflow-hidden p-4 transition-all ">
-        <Image
-          src="/temp-banner.png"
-          fill
-          alt="bannerImage"
-          className="object-cover border-8 rounded-2xl"
-        />
+      <div className="bg-gray-100 h-full w-full rounded-2xl gap-4 overflow-hidden p-4 transition-all">
+        <Image src="/temp-banner.png" fill alt="bannerImage" className="object-cover border-8 rounded-2xl" />
       </div>
     </motion.div>
   )
