@@ -3,8 +3,8 @@ import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 
-const font=DM_Sans({
-  subsets: ["latin"]
+const font = DM_Sans({
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -18,14 +18,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
     <html lang="en">
-      <body
-        className={font.className}
-      >
-        {children}
+      <body className={font.className}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
-    </ThemeProvider>
   );
 }
